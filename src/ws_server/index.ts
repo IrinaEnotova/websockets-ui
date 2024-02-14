@@ -1,5 +1,8 @@
-import { WebSocketServer } from "ws";
+import { WebSocketServer, WebSocket } from "ws";
 import dotenv from "dotenv";
+import getColorizedLog from "../utils/getColorizedLog";
+import LogStatus from "../enums/log.enum";
+import handleMessage from "./handlers/handleMessage";
 
 dotenv.config();
 
@@ -7,12 +10,15 @@ const port = parseInt(process.env.PORT!) || 3000;
 
 const wss = new WebSocketServer({ port });
 
-wss.on("connection", (ws) => {
-  ws.on("message", (data) => console.log(`Received message from client: ${data}`));
+wss.on("connection", (ws: WebSocket) => {
+  getColorizedLog(`WS is listening at ${port}`, LogStatus.Info);
+
+  ws.on("message", (message: string) => {
+    const data = JSON.parse(message);
+    handleMessage(data, ws);
+  });
 
   ws.on("close", () => {
-    console.log("A client disconnected");
+    getColorizedLog("Client disconnected", "warn");
   });
 });
-
-console.log(`WS is listening at ${port}`);
