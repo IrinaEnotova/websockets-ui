@@ -28,3 +28,24 @@ export interface GameData {
   idGame: string;
   idPlayer: string;
 }
+
+export interface IPosition {
+  x: number;
+  y: number;
+}
+
+export interface IShip {
+  position: IPosition;
+  direction: boolean;
+  type: "huge" | "large" | "medium" | "small";
+  length: number;
+}
+
+export type BoardCell = "empty" | "huge" | "large" | "medium" | "small";
+
+export interface IGameBoard {
+  currentGameId: string;
+  ships: BoardCell[][];
+  indexPlayer: string;
+  turn: boolean;
+}
