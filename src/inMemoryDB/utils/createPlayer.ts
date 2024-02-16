@@ -1,15 +1,18 @@
-import { players } from "..";
+import crypto from "crypto";
+import { clients, players } from "..";
 import MessageType from "../../enums/message.enum";
-import { IPlayer } from "../../interfaces";
+import { ClientWebSocket, IPlayer } from "../../interfaces";
 
-export default function createPlayer(name: string, password: string) {
-  const newId = players.length + 1;
+export default function createPlayer(name: string, password: string, ws: ClientWebSocket) {
+  const newId = crypto.randomUUID();
   const newPlayer: IPlayer = {
     name,
     password,
     id: newId,
   };
 
+  ws.index = newId;
+  clients.push(ws);
   players.push(newPlayer);
 
   return {

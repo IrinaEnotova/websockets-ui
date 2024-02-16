@@ -1,11 +1,11 @@
 import MessageType from "../../enums/message.enum";
 import isPlayerExist from "../../inMemoryDB/utils/isPlayerExist";
-import { IMessage } from "../../interfaces";
-import signIn from "./signIn";
-import signUp from "./signUp";
-import { WebSocket } from "ws";
+import { IMessage, ClientWebSocket } from "../../interfaces";
+import createRoom from "./room/createRoom";
+import signIn from "./user/signIn";
+import signUp from "./user/signUp";
 
-const handleMessage = (message: IMessage, ws: WebSocket) => {
+const handleMessage = (message: IMessage, ws: ClientWebSocket) => {
   console.log(message);
 
   switch (message.type) {
@@ -15,6 +15,9 @@ const handleMessage = (message: IMessage, ws: WebSocket) => {
       } else {
         signUp(message, ws);
       }
+      break;
+    case MessageType.RoomCreation:
+      createRoom(ws);
       break;
   }
 };

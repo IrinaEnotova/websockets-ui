@@ -1,8 +1,7 @@
-import { WebSocket } from "ws";
-import { IMessage } from "../../interfaces";
-import createPlayer from "../../inMemoryDB/utils/createPlayer";
+import { IMessage, ClientWebSocket } from "../../../interfaces";
+import createPlayer from "../../../inMemoryDB/utils/createPlayer";
 
-export default function signUp(message: IMessage, ws: WebSocket) {
+export default function signUp(message: IMessage, ws: ClientWebSocket) {
   console.log("sign up");
 
   const { name, password } = JSON.parse(message.data);
@@ -19,7 +18,7 @@ export default function signUp(message: IMessage, ws: WebSocket) {
 
     ws.send(JSON.stringify(res));
   } else {
-    const res = createPlayer(name, password);
+    const res = createPlayer(name, password, ws);
 
     ws.send(JSON.stringify(res));
   }

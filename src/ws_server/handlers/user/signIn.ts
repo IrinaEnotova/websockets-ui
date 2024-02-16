@@ -1,19 +1,19 @@
-import { WebSocket } from "ws";
-import { IMessage } from "../../interfaces";
-import { players } from "../../inMemoryDB";
-import getColorizedLog from "../../utils/getColorizedLog";
-import LogStatus from "../../enums/log.enum";
+import { IMessage, ClientWebSocket } from "../../../interfaces";
+import { clients, players } from "../../../inMemoryDB";
+import getColorizedLog from "../../../utils/getColorizedLog";
+import LogStatus from "../../../enums/log.enum";
 
-export default function signIn(message: IMessage, ws: WebSocket) {
+export default function signIn(message: IMessage, ws: ClientWebSocket) {
   console.log("sign in");
 
-  const { name, password, id } = JSON.parse(message.data);
+  const { name, password } = JSON.parse(message.data);
 
   const currentPlayer = players.find((player) => {
     return player.name === name && player.password === password;
   });
 
   if (currentPlayer) {
+    const id = currentPlayer.id;
     const res = {
       type: "reg",
       data: JSON.stringify({
@@ -24,6 +24,9 @@ export default function signIn(message: IMessage, ws: WebSocket) {
       }),
       id: 0,
     };
+
+    ws.index = currentPlayer.id;
+    clients.push(ws);
 
     ws.send(JSON.stringify(res));
   } else {
