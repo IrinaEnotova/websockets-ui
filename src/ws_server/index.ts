@@ -11,7 +11,7 @@ const port = parseInt(process.env.PORT!) || 3000;
 const wss = new WebSocketServer({ port });
 
 wss.on("connection", (ws: WebSocket) => {
-  getColorizedLog(`WS is listening at ${port}`, LogStatus.Info);
+  getColorizedLog(`WebSocket server is listening on the ${port} port!`, LogStatus.Info);
 
   ws.on("message", (message: string) => {
     const data = JSON.parse(message);

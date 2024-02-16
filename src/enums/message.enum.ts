@@ -1,6 +1,7 @@
 enum MessageType {
   Auth = "reg",
   GameCreation = "create_game",
+  RoomCreation = "create_room",
   GameStart = "start_game",
   Turn = "turn",
   Attack = "attack",
