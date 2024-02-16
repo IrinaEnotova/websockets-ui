@@ -5,6 +5,7 @@ import getColorizedLog from "../../../utils/getColorizedLog";
 import updateRoom from "./updateRoom";
 
 export default function createRoom(ws: ClientWebSocket) {
+  if (rooms.find((room) => room.roomId === ws.index)) return;
   const roomCreator = players.find((player) => player.id === ws.index);
 
   if (roomCreator) {
