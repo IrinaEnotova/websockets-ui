@@ -23,3 +23,8 @@ export interface IRoom {
     index: string;
   }[];
 }
+
+export interface GameData {
+  idGame: string;
+  idPlayer: string;
+}
