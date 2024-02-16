@@ -1,7 +1,9 @@
 import MessageType from "../../enums/message.enum";
 import isPlayerExist from "../../inMemoryDB/utils/isPlayerExist";
 import { IMessage, ClientWebSocket } from "../../interfaces";
+import addUserToRoom from "./room/addUserToRoom";
 import createRoom from "./room/createRoom";
+import updateRoom from "./room/updateRoom";
 import signIn from "./user/signIn";
 import signUp from "./user/signUp";
 
@@ -15,9 +17,13 @@ const handleMessage = (message: IMessage, ws: ClientWebSocket) => {
       } else {
         signUp(message, ws);
       }
+      updateRoom();
       break;
     case MessageType.RoomCreation:
       createRoom(ws);
+      break;
+    case MessageType.AddUserToRoom:
+      addUserToRoom(message, ws);
       break;
   }
 };
