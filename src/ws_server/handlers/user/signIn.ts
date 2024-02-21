@@ -2,6 +2,7 @@ import { IMessage, ClientWebSocket } from "../../../interfaces";
 import { clients, players } from "../../../inMemoryDB";
 import getColorizedLog from "../../../utils/getColorizedLog";
 import LogStatus from "../../../enums/log.enum";
+import MessageType from "../../../enums/message.enum";
 
 export default function signIn(message: IMessage, ws: ClientWebSocket) {
   console.log("sign in");
@@ -15,7 +16,7 @@ export default function signIn(message: IMessage, ws: ClientWebSocket) {
   if (currentPlayer) {
     const id = currentPlayer.id;
     const res = {
-      type: "reg",
+      type: MessageType.Auth,
       data: JSON.stringify({
         name: name,
         index: id,
@@ -31,7 +32,7 @@ export default function signIn(message: IMessage, ws: ClientWebSocket) {
     ws.send(JSON.stringify(res));
   } else {
     const res = {
-      type: "reg",
+      type: MessageType.Auth,
       data: JSON.stringify({
         error: true,
         errorText: "Invalid password",

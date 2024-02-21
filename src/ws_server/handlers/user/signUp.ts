@@ -1,5 +1,6 @@
 import { IMessage, ClientWebSocket } from "../../../interfaces";
 import createPlayer from "../../../inMemoryDB/utils/createPlayer";
+import MessageType from "../../../enums/message.enum";
 
 export default function signUp(message: IMessage, ws: ClientWebSocket) {
   console.log("sign up");
@@ -8,7 +9,7 @@ export default function signUp(message: IMessage, ws: ClientWebSocket) {
 
   if (name.trim().length < 5 || password.trim().length < 5) {
     const res = {
-      type: "reg",
+      type: MessageType.Auth,
       data: JSON.stringify({
         error: true,
         errorText: "Name and password should has minimum 5 characters length",

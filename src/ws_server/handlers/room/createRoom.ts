@@ -1,4 +1,5 @@
 import LogStatus from "../../../enums/log.enum";
+import MessageType from "../../../enums/message.enum";
 import { players, rooms } from "../../../inMemoryDB";
 import { ClientWebSocket } from "../../../interfaces";
 import getColorizedLog from "../../../utils/getColorizedLog";
@@ -24,7 +25,7 @@ export default function createRoom(ws: ClientWebSocket) {
     updateRoom();
   } else {
     const res = {
-      type: "create_room",
+      type: MessageType.RoomCreation,
       data: JSON.stringify({
         error: true,
         errorText: "Room creation is failed!",

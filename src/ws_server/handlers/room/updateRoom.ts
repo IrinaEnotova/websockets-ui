@@ -1,3 +1,4 @@
+import MessageType from "../../../enums/message.enum";
 import { clients, rooms } from "../../../inMemoryDB";
 
 export default function updateRoom() {
@@ -6,7 +7,7 @@ export default function updateRoom() {
   const updatedRoom = JSON.stringify(room);
 
   const res = {
-    type: "update_room",
+    type: MessageType.RoomUpdate,
     data: updatedRoom,
     id: 0,
   };

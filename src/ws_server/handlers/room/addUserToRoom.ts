@@ -1,3 +1,4 @@
+import MessageType from "../../../enums/message.enum";
 import { players, rooms, setRooms } from "../../../inMemoryDB";
 import { ClientWebSocket, IMessage } from "../../../interfaces";
 import updateRoom from "./updateRoom";
@@ -20,7 +21,7 @@ export default function addUserToRoom(message: IMessage, ws: ClientWebSocket) {
   }
 
   const res = {
-    type: "add_user_to_room",
+    type: MessageType.AddUserToRoom,
     data: JSON.stringify({
       indexRoom,
     }),

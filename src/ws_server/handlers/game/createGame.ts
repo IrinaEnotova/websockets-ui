@@ -1,3 +1,4 @@
+import MessageType from "../../../enums/message.enum";
 import { clients, rooms } from "../../../inMemoryDB";
 import { GameData, IMessage } from "../../../interfaces";
 
@@ -12,12 +13,12 @@ export default function createGame(message: IMessage) {
     const secondGameData: GameData = { idGame: indexRoom, idPlayer: secondPlayer.index };
 
     const firstRes = {
-      type: "create_game",
+      type: MessageType.GameCreation,
       data: JSON.stringify(firstGameData),
       id: 0,
     };
     const secondRes = {
-      type: "create_game",
+      type: MessageType.GameCreation,
       data: JSON.stringify(secondGameData),
       id: 0,
     };

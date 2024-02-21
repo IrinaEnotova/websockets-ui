@@ -1,3 +1,4 @@
+import MessageType from "../../../enums/message.enum";
 import { clients } from "../../../inMemoryDB";
 import { IGameBoard } from "../../../interfaces";
 import giveTurn from "./giveTurn";
@@ -8,12 +9,12 @@ export default function startGame(gameData: IGameBoard[]) {
 
   if (firstPlayer && secondPlayer) {
     const firstRes = {
-      type: "start_game",
+      type: MessageType.GameStart,
       data: JSON.stringify({ ships: firstPlayer.ships, currentPlayerIndex: firstPlayer.indexPlayer }),
       id: 0,
     };
     const secondRes = {
-      type: "start_game",
+      type: MessageType.GameStart,
       data: JSON.stringify({ ships: secondPlayer.ships, currentPlayerIndex: secondPlayer.indexPlayer }),
       id: 0,
     };
