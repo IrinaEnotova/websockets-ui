@@ -7,6 +7,7 @@ enum MessageType {
   GameStart = "start_game",
   Turn = "turn",
   Attack = "attack",
+  RandomAttack = "randomAttack",
   Finish = "finish",
   RoomUpdate = "update_room",
   WinnersUpdate = "update_winners",

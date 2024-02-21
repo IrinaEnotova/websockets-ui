@@ -10,6 +10,7 @@ export interface IPlayer {
   name: string;
   password: string;
   id: string;
+  wins?: number;
 }
 
 export interface ClientWebSocket extends WebSocket {
@@ -41,11 +42,16 @@ export interface IShip {
   length: number;
 }
 
-export type BoardCell = "empty" | "huge" | "large" | "medium" | "small";
+export type BoardCell = "empty" | "huge" | "large" | "medium" | "small" | "miss" | "shot" | "killed";
 
 export interface IGameBoard {
   currentGameId: string;
   ships: BoardCell[][];
   indexPlayer: string;
   turn: boolean;
+}
+
+export interface Coords {
+  x: number;
+  y: number;
 }

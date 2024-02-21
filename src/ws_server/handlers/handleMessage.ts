@@ -2,6 +2,7 @@ import MessageType from "../../enums/message.enum";
 import isPlayerExist from "../../inMemoryDB/utils/isPlayerExist";
 import { IMessage, ClientWebSocket } from "../../interfaces";
 import addShips from "./game/addShips";
+import attack from "./game/attack";
 import createGame from "./game/createGame";
 import addUserToRoom from "./room/addUserToRoom";
 import createRoom from "./room/createRoom";
@@ -30,6 +31,12 @@ const handleMessage = (message: IMessage, ws: ClientWebSocket) => {
       break;
     case MessageType.AddShips:
       addShips(message);
+      break;
+    case MessageType.Attack:
+      attack(message, false);
+      break;
+    case MessageType.RandomAttack:
+      attack(message, true);
       break;
   }
 };

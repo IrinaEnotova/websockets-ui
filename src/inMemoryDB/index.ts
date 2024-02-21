@@ -1,10 +1,18 @@
 import { ClientWebSocket, IGameBoard, IPlayer, IRoom } from "../interfaces";
 
-export const players: IPlayer[] = [];
+export let players: IPlayer[] = [];
 export const clients: ClientWebSocket[] = [];
 export let rooms: IRoom[] = [];
-export const gameBoards: IGameBoard[] = [];
+export let gameBoards: IGameBoard[] = [];
 
 export function setRooms(newRooms: IRoom[]) {
   rooms = newRooms;
+}
+
+export function setGameBoards(newGameBoards: IGameBoard[]) {
+  gameBoards = newGameBoards;
+}
+
+export function setPlayers(newPlayers: IPlayer[]) {
+  players = newPlayers;
 }
