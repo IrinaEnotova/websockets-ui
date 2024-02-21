@@ -24,6 +24,7 @@ export default function startGame(gameData: IGameBoard[]) {
       firstClient.send(JSON.stringify(firstRes));
       secondClient.send(JSON.stringify(secondRes));
 
+      firstPlayer.turn = true;
       giveTurn(firstClient, secondClient, firstClient.index!);
     }
   }
