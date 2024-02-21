@@ -55,3 +55,8 @@ export interface Coords {
   x: number;
   y: number;
 }
+
+export interface IWinner {
+  name: string;
+  wins: number;
+}

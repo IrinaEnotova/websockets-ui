@@ -9,6 +9,7 @@ export default function createPlayer(name: string, password: string, ws: ClientW
     name,
     password,
     id: newId,
+    wins: 0,
   };
 
   ws.index = newId;

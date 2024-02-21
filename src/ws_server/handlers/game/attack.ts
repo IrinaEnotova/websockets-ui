@@ -7,6 +7,7 @@ import isShipKilled from "./isShipKilled";
 import giveTurn from "./giveTurn";
 import isGameOver from "./isGameOver";
 import markMissed from "./markMissed";
+import updateWinnerTable from "../winners/updateWinnerTable";
 
 export default function attack(message: IMessage, isRandom: boolean) {
   const attackData = JSON.parse(message.data);
@@ -104,7 +105,7 @@ export default function attack(message: IMessage, isRandom: boolean) {
           firstClient?.send(JSON.stringify(resGameOver));
           secondClient?.send(JSON.stringify(resGameOver));
 
-          // TODO HERE UPDATE WINNERS
+          updateWinnerTable(attackData.indexPlayer);
           setGameBoards(gameBoards.filter((game) => game.currentGameId !== attackData.gameId));
           setRooms(rooms.filter((room) => room.roomId !== attackData.gameId));
 
